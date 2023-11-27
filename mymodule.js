@@ -1,18 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
-// Exportiere die Funktion als Modul
+// Export the function as a module
 module.exports = function(directory, extension, callback) {
-  // Lese das Verzeichnis asynchron
+  // Read the directory asynchronously
   fs.readdir(directory, (err, files) => {
     if (err) {
-      return callback(err); // Bei einem Fehler rufe die Callback-Funktion mit dem Fehler auf
+      return callback(err); // In case of an error, invoke the callback function with the error
     }
 
-    // Filtere die Dateien nach ihrer Erweiterung
+    // Filter files based on their extension
     const filteredFiles = files.filter(file => path.extname(file) === `.${extension}`);
 
-    // Rufe die Callback-Funktion mit null als Fehlerargument und der gefilterten Liste auf
+    // Invoke the callback function with null as the error argument and the filtered list
     callback(null, filteredFiles);
   });
 };

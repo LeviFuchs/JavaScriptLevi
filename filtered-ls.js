@@ -1,24 +1,24 @@
 // list-files.js
 
-// Importiere die 'fs' (Dateisystem) und 'path' (Pfad) Module
+// Import the 'fs' (file system) and 'path' modules
 const fs = require('fs');
 const path = require('path');
 
-// Erhalte Verzeichnis und Dateierweiterung von den Befehlszeilenargumenten
-const directoryPath = process.argv[2];  // Das Verzeichnis, das durchsucht werden soll
-const fileExtension = process.argv[3];  // Die Dateierweiterung für die Filterung
+// Get directory and file extension from command-line arguments
+const directoryPath = process.argv[2];  // The directory to be searched
+const fileExtension = process.argv[3];  // The file extension for filtering
 
-// Lese das Verzeichnis asynchron
+// Read the directory asynchronously
 fs.readdir(directoryPath, (error, files) => {
   if (error) {
-    // Handle-Funktion für Fehler beim Lesen des Verzeichnisses
-    console.error(`Fehler beim Lesen des Verzeichnisses: ${error.message}`);
+    // Error-handling function for reading the directory
+    console.error(`Error reading the directory: ${error.message}`);
     return;
   }
 
-  // Filtere Dateien nach ihrer Erweiterung
+  // Filter files based on their extension
   const filteredFiles = files.filter(file => path.extname(file) === `.${fileExtension}`);
 
-  // Gib die gefilterte Liste der Dateien aus
+  // Print the filtered list of files
   filteredFiles.forEach(file => console.log(file));
 });
